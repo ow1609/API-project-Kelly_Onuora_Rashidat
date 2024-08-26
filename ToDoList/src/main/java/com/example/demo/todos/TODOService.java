@@ -30,10 +30,16 @@ public class TODOService {
     }
 
     // Create and save a new or existing todo
-    public TODO createTODO(TODO todo) throws IllegalArgumentException, OptimisticLockingFailureException {
+    public TODO createTODO(TODO todo) throws IllegalArgumentException, ObjectOptimisticLockingFailureException {
         return this.todoRepository.save(todo);
     }
 
     // Update a todo by its id
-
+    public TODO updateTODO(Long id, TODO todo) throws NoSuchElementException {
+        return this.todoRepository.save(todo);
+      }
+    
+      public void deleteTODO(Long id) {
+        this.todoRepository.delete(getTODOById(id));
+      }
 }
