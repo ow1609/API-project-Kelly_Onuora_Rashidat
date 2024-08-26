@@ -22,10 +22,11 @@ public class TODO {
 
     // constructors
     public TODO() {
+        this(null, null, false);
     }
 
-    public TODO(Long id, String title, String description, boolean taskCompleted) {
-        this.id = id;
+    public TODO(String title, String description, boolean taskCompleted) {
+        // this.id = id;
         this.title = title;
         this.description = description;
         this.taskCompleted = taskCompleted;
