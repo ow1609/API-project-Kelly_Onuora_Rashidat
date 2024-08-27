@@ -33,7 +33,7 @@ public class TODOController {
     return todoService.getAllTODOs();
     }
 
-    // Retrieve a specific TODO by its ID
+    // Retrieve a specific Todo by its ID
     @GetMapping("/{id}")
     public ResponseEntity<TODO> getTODOById(@PathVariable Long id) {
         try {
@@ -44,28 +44,27 @@ public class TODOController {
         }
     }
 
-    // Create aw  new TODO
+    // Create a new Todo
     @PostMapping()
     public ResponseEntity<TODO> createTodo(@RequestBody TODO todo) {
-        TODO createTodo = todoService.createTODO(todo);
+        TODO createdTodo = todoService.createTODO(todo);
         return new ResponseEntity<>(createdTodo, HttpStatus.CREATED);
     }
 
-    // Update an existing TODO by its ID
-  @PutMapping(path = "/{id}")
-  public ResponseEntity<TODO> updateTodo(@PathVariable Long id, @RequestBody TODO todo) {
-    try {
-      TODO existingtodo = todoService.updateTODO(id, todo);
-      return new ResponseEntity<>(existingTodo, HttpStatus.OK);
-    } catch (NoSuchElementException e) {
-      return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    // Update an existing Todo by its ID
+    @PutMapping(path = "/{id}")
+    public ResponseEntity<TODO> updateTodo(@PathVariable Long id, @RequestBody TODO todo) {
+        try {
+        TODO existingTodo = todoService.updateTODO(id, todo);
+        return new ResponseEntity<>(existingTodo, HttpStatus.OK);
+        } catch (NoSuchElementException e) {
+        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
     }
-  }
 
-
-    // Delete an existing TODO by its ID
+    // Delete an existing Todo by its ID
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> deleteTodo(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteTodo(@PathVariable Long id) {
         try {
             todoService.deleteTODO(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
