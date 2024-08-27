@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.todos;
 
 import java.util.List;
 import java.util.NoSuchElementException;
@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.RequestMapping;
 
-import com.example.demo.TODO;
+// import com.example.demo.TODO;
 
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -22,7 +22,7 @@ import org.springframework.http.HttpStatus;
 public class TODOController {
     // Handles HTTP requests and maps them to the corresponding service methods
     private TODOService todoService;
-
+    @Autowired
     public TODOController(TODOService todoService) {
       this.todoService = todoService;
     }
@@ -37,7 +37,7 @@ public class TODOController {
     @GetMapping("/{id}")
     public ResponseEntity<TODO> getTODOById(@PathVariable Long id) {
         try {
-            TODO todo = todoService.getTODO(id);
+            TODO todo = todoService.getTODOById(id);
             return new ResponseEntity<>(todo, HttpStatus.OK);
         } catch (NoSuchElementException e) {
             return new ResponseEntity<>( HttpStatus.NOT_FOUND);
@@ -48,7 +48,7 @@ public class TODOController {
     @PostMapping()
     public ResponseEntity<TODO> createTodo(@RequestBody TODO todo) {
         TODO createTodo = todoService.createTODO(todo);
-        return new ResponseEntity<>(createdTodo, HttpStatus.CREATED);
+        return new ResponseEntity<>(createTodo, HttpStatus.CREATED);
     }
 
     // Update an existing TODO by its ID
@@ -56,7 +56,7 @@ public class TODOController {
   public ResponseEntity<TODO> updateTodo(@PathVariable Long id, @RequestBody TODO todo) {
     try {
       TODO existingtodo = todoService.updateTODO(id, todo);
-      return new ResponseEntity<>(existingTodo, HttpStatus.OK);
+      return new ResponseEntity<>(existingtodo, HttpStatus.OK);
     } catch (NoSuchElementException e) {
       return new ResponseEntity<>(HttpStatus.NOT_FOUND);
     }
@@ -65,7 +65,7 @@ public class TODOController {
 
     // Delete an existing TODO by its ID
     @DeleteMapping(path = "/{id}")
-    public ResponseEntity<Void> deleteTodo(@PathVariable UUID id) {
+    public ResponseEntity<Void> deleteTodo(@PathVariable Long id) {
         try {
             todoService.deleteTODO(id);
             return new ResponseEntity<>(HttpStatus.NO_CONTENT);
