@@ -25,7 +25,7 @@ public class TODOService {
     }
 
     // Get a todo by its id
-    public TODO getTODOById(Long id) throws NoSuchElementException {
+    public TODO getTODO(Long id) throws NoSuchElementException {
         return this.todoRepository.findById(id).orElseThrow();
     }
 
@@ -40,6 +40,6 @@ public class TODOService {
       }
     
       public void deleteTODO(Long id) {
-        this.todoRepository.delete(getTODOById(id));
+        this.todoRepository.delete(getTODO(id));
       }
 }
