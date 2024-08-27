@@ -1,4 +1,4 @@
-package com.example.demo;
+package com.example.demo.todos;
 
 import java.util.List;
 import java.util.NoSuchElementException;
